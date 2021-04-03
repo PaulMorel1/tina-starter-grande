@@ -74,75 +74,63 @@ export default function List({ data, pageContext }) {
   )
 }
 
-export const pageQuery = graphql`
-  query($listType: String!, $slug: String!, $skip: Int!, $limit: Int!) {
-    page: pagesJson(path: { eq: $slug }) {
-      path
-      title
-      hero {
-        headline
-        textline
-        large
-        overlay
-        ctas {
-          label
-          link
-          primary
-          arrow
-        }
-        image {
-          childImageSharp {
-            fluid(quality: 70, maxWidth: 1920) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
+export const pageQuery = graphql`query ($listType: String!, $slug: String!, $skip: Int!, $limit: Int!) {
+  page: pagesJson(path: {eq: $slug}) {
+    path
+    title
+    hero {
+      headline
+      textline
+      large
+      overlay
+      ctas {
+        label
+        link
+        primary
+        arrow
       }
-      listType
-      rawJson
-      fileRelativePath
-    }
-    posts: allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date] }
-      filter: {
-        frontmatter: { type: { eq: $listType } }
-        published: { eq: true }
-      }
-      limit: $limit
-      skip: $skip
-    ) {
-      edges {
-        node {
-          id
-          excerpt
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            path
-            title
-            draft
-            authors
-            tags
-          }
+      image {
+        childImageSharp {
+          gatsbyImageData(quality: 70, layout: FULL_WIDTH)
         }
       }
     }
-    authors: settingsJson(
-      fileRelativePath: { eq: "/content/settings/authors.json" }
-    ) {
-      ...authors
-
-      rawJson
-      fileRelativePath
-    }
-    tags: settingsJson(
-      fileRelativePath: { eq: "/content/settings/tags.json" }
-    ) {
-      ...tags
-
-      rawJson
-      fileRelativePath
+    listType
+    rawJson
+    fileRelativePath
+  }
+  posts: allMarkdownRemark(
+    sort: {order: DESC, fields: [frontmatter___date]}
+    filter: {frontmatter: {type: {eq: $listType}}, published: {eq: true}}
+    limit: $limit
+    skip: $skip
+  ) {
+    edges {
+      node {
+        id
+        excerpt
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          path
+          title
+          draft
+          authors
+          tags
+        }
+      }
     }
   }
+  authors: settingsJson(fileRelativePath: {eq: "/content/settings/authors.json"}) {
+    ...authors
+    rawJson
+    fileRelativePath
+  }
+  tags: settingsJson(fileRelativePath: {eq: "/content/settings/tags.json"}) {
+    ...tags
+    rawJson
+    fileRelativePath
+  }
+}
 `
 
 export const ListNav = styled.div`
@@ -188,7 +176,7 @@ const ListForm = {
           previewSrc: (formValues) => {
             if (!formValues.jsonNode.hero || !formValues.jsonNode.hero.image)
               return ""
-            return formValues.jsonNode.hero.image.childImageSharp.fluid.src
+            return formValues.jsonNode.hero.image.childImageSharp.gatsbyImageData.src;
           },
         },
         {

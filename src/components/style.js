@@ -1,7 +1,7 @@
 import React from "react"
 import styled, { createGlobalStyle, css } from "styled-components"
 import { mix, shade, transparentize, getContrast } from "polished"
-import Img from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image";
 import { Link } from "gatsby"
 
 export const bestContrast = (baseColor, optionOne, optionTwo) => {
@@ -497,7 +497,7 @@ export const Overlay = styled.div`
   opacity: 0.7;
 `
 
-export const Image = styled(Img)``
+export const Image = styled(GatsbyImage)``
 
 export const Paper = styled.div`
   position: relative;

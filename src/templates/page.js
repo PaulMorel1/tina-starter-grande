@@ -78,7 +78,7 @@ const PageForm = {
           previewSrc: (formValues, input) => {
             if (!formValues.jsonNode.hero || !formValues.jsonNode.hero.image)
               return ""
-            return formValues.jsonNode.hero.image.childImageSharp.fluid.src
+            return formValues.jsonNode.hero.image.childImageSharp.gatsbyImageData.src;
           },
         },
         {
@@ -133,59 +133,53 @@ const PageForm = {
   ],
 }
 
-export const pageQuery = graphql`
-  query($path: String!) {
-    page: pagesJson(path: { eq: $path }) {
-      title
-      displayTitle
-      hero {
-        headline
-        textline
-        large
-        overlay
-        image {
-          childImageSharp {
-            fluid(quality: 70, maxWidth: 1920) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
-        ctas {
-          label
-          link
-          primary
-          arrow
+export const pageQuery = graphql`query ($path: String!) {
+  page: pagesJson(path: {eq: $path}) {
+    title
+    displayTitle
+    hero {
+      headline
+      textline
+      large
+      overlay
+      image {
+        childImageSharp {
+          gatsbyImageData(quality: 70, layout: FULL_WIDTH)
         }
       }
-      blocks {
-        _template
-        content
-        name
-        title
-        underline
-        center
-        recipient
-        fields {
-          label
-          inputType
-          autocomplete
-        }
-        image {
-          childImageSharp {
-            fluid(quality: 70, maxWidth: 1920) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
+      ctas {
+        label
+        link
+        primary
+        arrow
       }
-      childrenPagesJsonBlockMarkdown {
-        childMarkdownRemark {
-          html
-        }
-      }
-
-      rawJson
-      fileRelativePath
     }
+    blocks {
+      _template
+      content
+      name
+      title
+      underline
+      center
+      recipient
+      fields {
+        label
+        inputType
+        autocomplete
+      }
+      image {
+        childImageSharp {
+          gatsbyImageData(quality: 70, layout: FULL_WIDTH)
+        }
+      }
+    }
+    childrenPagesJsonBlockMarkdown {
+      childMarkdownRemark {
+        html
+      }
+    }
+    rawJson
+    fileRelativePath
   }
+}
 `

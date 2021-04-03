@@ -64,7 +64,7 @@ function Post(props) {
             !formValues.frontmatter.hero.image
           )
             return ""
-          return formValues.frontmatter.hero.image.childImageSharp.fluid.src
+          return formValues.frontmatter.hero.image.childImageSharp.gatsbyImageData.src;
         },
       },
       {
@@ -123,45 +123,37 @@ function Post(props) {
 
 export default Post
 
-export const postQuery = graphql`
-  query($path: String!) {
-    markdownRemark(
-      published: { eq: true }
-      frontmatter: { path: { eq: $path } }
-    ) {
-      id
-      excerpt(pruneLength: 160)
-      html
-
-      frontmatter {
-        path
-        date(formatString: "MMMM DD, YYYY")
-        title
-        draft
-        authors
-        hero {
-          large
-          overlay
-          image {
-            childImageSharp {
-              fluid(quality: 70, maxWidth: 1920) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
+export const postQuery = graphql`query ($path: String!) {
+  markdownRemark(published: {eq: true}, frontmatter: {path: {eq: $path}}) {
+    id
+    excerpt(pruneLength: 160)
+    html
+    frontmatter {
+      path
+      date(formatString: "MMMM DD, YYYY")
+      title
+      draft
+      authors
+      hero {
+        large
+        overlay
+        image {
+          childImageSharp {
+            gatsbyImageData(quality: 70, layout: FULL_WIDTH)
           }
         }
-        tags
       }
-
-      fileRelativePath
-      rawFrontmatter
-      rawMarkdownBody
+      tags
     }
-    authors: settingsJson(fileRelativePath: { eq: "/content/settings/authors.json" }) {
-      ...authors
-    }
-    tags: settingsJson(fileRelativePath: { eq: "/content/settings/tags.json" }) {
-      ...tags
-    }
+    fileRelativePath
+    rawFrontmatter
+    rawMarkdownBody
   }
+  authors: settingsJson(fileRelativePath: {eq: "/content/settings/authors.json"}) {
+    ...authors
+  }
+  tags: settingsJson(fileRelativePath: {eq: "/content/settings/tags.json"}) {
+    ...tags
+  }
+}
 `

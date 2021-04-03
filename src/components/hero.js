@@ -10,7 +10,7 @@ export const Hero = ({ hero }) => {
       <HeroBackground>
         {hero.overlay && <Overlay />}
         {hero.image && (
-          <HeroImage fluid={hero.image.childImageSharp.fluid}></HeroImage>
+          <HeroImage fluid={hero.image.childImageSharp.gatsbyImageData}></HeroImage>
         )}
       </HeroBackground>
       {(hero.headline || hero.textline || hero.ctas) && (
@@ -37,7 +37,7 @@ export const Hero = ({ hero }) => {
         </HeroContent>
       )}
     </HeroWrapper>
-  )
+  );
 }
 
 const HeroWrapper = styled.div`

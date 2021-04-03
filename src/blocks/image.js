@@ -1,17 +1,15 @@
 import React from "react"
 import styled from "styled-components"
-import Img from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image";
 import get from "lodash.get"
 
 export function Image({ data }) {
-  return (
-    data.image &&
-    data.image.childImageSharp && (
-      <ImageWrapper>
-        <Img fluid={data.image.childImageSharp.fluid} />
-      </ImageWrapper>
-    )
-  )
+  return data.image &&
+  data.image.childImageSharp && (
+    <ImageWrapper>
+      <GatsbyImage image={data.image.childImageSharp.gatsbyImageData} />
+    </ImageWrapper>
+  );
 }
 
 const ImageWrapper = styled.div`
@@ -36,7 +34,7 @@ export const ImageBlock = {
         const pathName = fieldProps.input.name.replace("rawJson", "jsonNode")
         const imageNode = get(formValues, pathName)
         if (!imageNode || !imageNode.childImageSharp) return ""
-        return imageNode.childImageSharp.fluid.src
+        return imageNode.childImageSharp.gatsbyImageData.src;
       },
     },
   ],

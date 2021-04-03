@@ -101,51 +101,48 @@ const TinaOverrideGlobalStyle = createGlobalStyle`
   }
 `
 
-export const globalThemeFragment = graphql`
-  fragment globalTheme on SettingsJson {
-    color {
-      black
-      white
-      primary
-      secondary
-    }
-    easing
-    breakpoints {
-      small
-      medium
-      large
-      huge
-    }
-    radius {
-      small
-    }
-    header {
-      overline
-      underline
-      transparent
-      height
-    }
-    menu {
-      style
-    }
-    hero {
-      image {
-        childImageSharp {
-          fluid(quality: 70, maxWidth: 1920) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      large
-      overlay
-      overlap
-      parallax
-    }
-    typography {
-      uppercaseH2
-    }
-    defaultDarkMode
+export const globalThemeFragment = graphql`fragment globalTheme on SettingsJson {
+  color {
+    black
+    white
+    primary
+    secondary
   }
+  easing
+  breakpoints {
+    small
+    medium
+    large
+    huge
+  }
+  radius {
+    small
+  }
+  header {
+    overline
+    underline
+    transparent
+    height
+  }
+  menu {
+    style
+  }
+  hero {
+    image {
+      childImageSharp {
+        gatsbyImageData(quality: 70, layout: FULL_WIDTH)
+      }
+    }
+    large
+    overlay
+    overlap
+    parallax
+  }
+  typography {
+    uppercaseH2
+  }
+  defaultDarkMode
+}
 `
 
 export const ThemeForm = {
