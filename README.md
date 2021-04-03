@@ -27,6 +27,7 @@
   - Author(s)
   - Draft mode
   - Inline editing mode
+  - Tags
 - Styled Components
 
 <br />
@@ -51,9 +52,13 @@ We encourage you to report bugs, request features or submit improvements! We mad
 
 ## :crystal_ball: Wishlist/Roadmap
 
-- Blog categories & tags
+- Social media sharing links
+- Continuous integration / deployment scripts with common platforms. AWS, Netlify, Heroku, Circle, etc.
+- Ad hoc tag creation on posts
+- Theme presets that include images, content & theme settings
+- Theme creation wizard
+- Theme switcher
 - Additional blocks: map, image, hero, code
-- Theme setup wizard with presets that include images, content & theme settings
 - [Request something](https://github.com/tinacms/tina-starter-grande/issues/new)
 
 <br />
