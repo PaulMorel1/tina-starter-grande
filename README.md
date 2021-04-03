@@ -52,6 +52,8 @@ We encourage you to report bugs, request features or submit improvements! We mad
 
 ## :crystal_ball: Wishlist/Roadmap
 
+- Upgrade to gatsby 3.0. This is required to upgrade to gatsby-plugin-image.
+  - There is a version conflict on "graphql"
 - Upgrade image handling from gatsby-image to gatsby-plugin-image
 - Cross platform compatible media manager.
   - Windows support
