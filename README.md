@@ -52,6 +52,11 @@ We encourage you to report bugs, request features or submit improvements! We mad
 
 ## :crystal_ball: Wishlist/Roadmap
 
+- Upgrade image handling from gatsby-image to gatsby-plugin-image
+- Cross platform compatible media manager.
+  - Windows support
+  - Fail gracefully and with helpful feedback
+  - Q: This seems to be solved in other projects. How/why?
 - Social media sharing links
 - Continuous integration / deployment scripts with common platforms. AWS, Netlify, Heroku, Circle, etc.
 - Ad hoc tag creation on posts
